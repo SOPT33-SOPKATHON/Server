@@ -1,4 +1,4 @@
-package com.sopt.sopkathonServer;
+package com.sopt.sopkathonServer.common.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
