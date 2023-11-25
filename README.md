@@ -1,47 +1,55 @@
-# ✅ 콩 (Cong)
+# 🫛 콩 (Cong)
 
 > 33기 DO SOPT 솝커톤
 > 
-> 당신의 축하를 기록하세요
+> 축하의 순간 사라지면 안되니까, 우리 콩(Cong) 해요
 
 <hr>
 
-## ✅ Contributors
+## 🫛 Contributors
 |                                                                     이동섭🍋                                                                      |                                           박경린🍇                                            |
 |:----------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------:|
-| <img src="https://github.com/GOSOPT-CDS-TEAM7-DeskTop/Backend/assets/67463603/3c92f168-1ff0-42a4-a91f-9fbd11189d35" width="200" height="200"/> | <img src="" width="200" height="200"/> |
+| <img src="https://github.com/GOSOPT-CDS-TEAM7-DeskTop/Backend/assets/67463603/3c92f168-1ff0-42a4-a91f-9fbd11189d35" width="200" height="200"/> | <img src="https://github.com/SOPT33-SOPKATHON/Server/assets/102944310/bbd94b9d-6c41-4408-a1b1-b76112ad8e61" width="200" height="200"/> |
 |                                                   [ddongseop](https://github.com/ddongseop)                                                    |                            [pkl0912](https://github.com/pkl0912)                             |
 
 <hr>
 
-## ✅️ Role
+## 🫛 Role
 
 | 담당 역할                |      섭팟      |
 |:---------------------|:------------:|
 | 초기 세팅 후 푸시 🧵        | 이동섭🍋, 박경린🍇 |
 | ERD 및 엔티티 설계 🏛️     | 이동섭🍋, 박경린🍇 |
-| ✅ API 개발             |    이동섭🍋     |
-| ✅ API 개발             |    박경린🍇     |
+| API 개발 🫛              |   이동섭🍋, 박경린🍇    |
 | 리드미, 아키텍처 구조도 작성 📄  |    박경린🍇     |
 | AWS 세팅 후 HTTPS 배포 🚀 |    이동섭🍋     |
 
 <hr>
+<img width="600" alt="image" src="https://github.com/SOPT33-SOPKATHON/Server/assets/67463603/599f2a23-630e-4276-8837-d706c5ed1a97">
 
-## ✅ API Docs
 
-### 🔗 [Link](https://rileybyeon.notion.site/API-1e4864ddfd764d13898c922e340c76b6?pvs=4) ✅링크
-✅ 사진
+## 🫛 API Docs
+
+### 🔗 [Link](https://rileybyeon.notion.site/API-1e4864ddfd764d13898c922e340c76b6?pvs=4)
+<img width="1116" alt="image" src="https://github.com/SOPT33-SOPKATHON/Server/assets/67463603/03fd4c00-3802-4355-b8ca-fc5d321322dc">
 <hr>
 
-## ✅️ ERD
+## 🫛️ ERD
 <hr>
-![image](https://github.com/SOPT33-SOPKATHON/Server/assets/67463603/810827a4-647d-45f7-931e-44ae04625af2)
 
+![image](https://github.com/SOPT33-SOPKATHON/Server/assets/67463603/6ff2c0f2-8339-4948-8ee3-886f9c6c67cb)
 
-## ✅ Project Architecture
+## 🫛 Project Architecture & Tech Stack
 <img width="700" alt="image" src="https://github.com/SOPT33-SOPKATHON/Server/assets/67463603/ddac0047-3ccd-4f9d-8709-90f2bd5525db">
 
-## ✅ Project Structure
+## 🫛 실행 방법
+1. `git clone https://github.com/SOPT33-SOPKATHON/Server.git`
+
+3. 환경변수 세팅 (application-secret.properties)
+
+4. 실행
+
+## 🫛 Project Structure
 
 `도메인 패키지 구조` 사용
 
@@ -52,8 +60,9 @@
         🗂 domain
         🗂 dto
         🗂 exception
-    🗂 ✅
-    🗂 ✅
+    🗂 celeb
+    🗂 room
+    🗂 user
 ```
 
 ## 🌱 Branch
@@ -77,7 +86,7 @@
 
 <hr>
 
-## ✅ Commit Convention
+## 🌱 Commit Convention
 
 `ex) [FEAT] #2 댓글 작성 API 기능 구현`
 
@@ -93,7 +102,7 @@
 - 세부 기능 기준
 - 이슈번호 붙이는 단위 : **[FEAT], [FIX], [REFACTOR]**
 
-## ✅ Code Convention
+## 🌱 Code Convention
 
 - **작업하고 커밋하기 전에 잊지 말 것**
   - 코드 포맷팅 ⇒ window : ctrl + alt + l , mac : command + option + l
@@ -151,7 +160,7 @@
 14. 객체를 조회하는 함수는 JPA Repository에서 findXxx 형식의 네이밍 쿼리메소드를 사용하므로 개발자가 작성하는 Service단에서는 되도록이면 getXxx를 사용하자.
 ```
 
-## ✅ Code Review Convention
+## 🌱 Code Review Convention
 - 뱅크샐러드 코드 리뷰 방식 참고 (https://blog.banksalad.com/tech/banksalad-code-review-culture/)
 - ex. `[P1] 이건 꼭 반영해주셔야해요!`
 - 코드 수정이 필요한 것에 대해서만 `Pn` 붙이기

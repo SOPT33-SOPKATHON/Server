@@ -18,7 +18,7 @@ public class UserController {
     private final SocialServiceProvider socialServiceProvider;
 
     @GetMapping("/login")
-    public ApiResponse<SocialLoginResponse> login(@RequestHeader("code") String code) {
+    public ApiResponse<SocialLoginResponse> login(@RequestHeader("Authorization") String code) {
         SocialService socialService = socialServiceProvider.getSocialService(SocialPlatform.KAKAO);
         return ApiResponse.success(SuccessType.SOCIAL_LOGIN_SUCCESS, socialService.login(SocialLoginRequest.of(code)));
     }
