@@ -5,7 +5,9 @@ import com.sopt.sopkathonServer.common.exception.enums.ErrorType;
 import com.sopt.sopkathonServer.common.exception.model.BusinessException;
 import com.sopt.sopkathonServer.room.domain.Room;
 import com.sopt.sopkathonServer.room.dto.request.RoomCreateRequest;
+import com.sopt.sopkathonServer.room.dto.request.RoomGetRequest;
 import com.sopt.sopkathonServer.room.dto.response.RoomCreateResponse;
+import com.sopt.sopkathonServer.room.dto.response.RoomListResponse;
 import com.sopt.sopkathonServer.room.repository.RoomJpaRepository;
 import com.sopt.sopkathonServer.user.domain.User;
 import com.sopt.sopkathonServer.user.repository.UserJpaRepository;
@@ -52,6 +54,13 @@ public class RoomService {
 
         return RoomCreateResponse.of(room);
 
+    }
+
+    public RoomListResponse getRoomList(RoomGetRequest request) {
+        User user = userJpaRepository.findById(request.userId())
+                .orElseThrow(() -> new BusinessException(ErrorType.USER_NOT_FOUND_EXCEPTION));
+
+        return RoomListResponse.of(user, user.getRoomList());
     }
 
 }

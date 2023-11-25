@@ -14,6 +14,7 @@ public enum SuccessType {
      */
     PROCESS_SUCCESS(HttpStatus.OK, "OK"),
     SOCIAL_LOGIN_SUCCESS(HttpStatus.OK, "소셜 로그인 성공"),
+    ROOM_LIST_SUCCESS(HttpStatus.OK, "방 리스트 조회가 성공했습니다."),
 
     /**
      * 201 CREATED
