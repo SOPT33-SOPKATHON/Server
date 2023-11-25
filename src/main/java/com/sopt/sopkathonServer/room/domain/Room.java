@@ -49,6 +49,11 @@ public class Room extends BaseTimeEntity {
         celebList.add(celeb);
     }
 
+    public int calCelebNum(List<Celeb> celebList){
+        return celebList.size();
+
+    }
+
     public Room(String roomName, String roomContent, int year, int month, int day, String roomUUID, User user) {
         this.roomName = roomName;
         this.roomContent = roomContent;
