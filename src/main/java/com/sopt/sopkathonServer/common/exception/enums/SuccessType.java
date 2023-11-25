@@ -19,7 +19,8 @@ public enum SuccessType {
      * 201 CREATED
      */
 
-    CELEB_CREATE_SUCCESS(HttpStatus.OK, "축하 메시지가 성공적으로 생성됐습니다"),
+    CELEB_CREATE_SUCCESS(HttpStatus.CREATED, "축하 메시지가 성공적으로 생성됐습니다."),
+    ROOM_CREATE_SUCCESS(HttpStatus.CREATED, "방이 성공적으로 생성됐습니다.")
 
     /**
      * 204 NO CONTENT

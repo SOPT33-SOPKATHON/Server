@@ -1,6 +1,5 @@
-package com.sopt.sopkathonServer.user.kakao;
+package com.sopt.sopkathonServer.user.service;
 
-import com.sopt.sopkathonServer.user.SocialService;
 import com.sopt.sopkathonServer.user.domain.User;
 import com.sopt.sopkathonServer.user.domain.dto.response.SocialLoginResponse;
 import com.sopt.sopkathonServer.user.kakao.dto.response.KakaoAccessTokenResponse;
@@ -8,7 +7,7 @@ import com.sopt.sopkathonServer.user.kakao.dto.response.KakaoUserResponse;
 import com.sopt.sopkathonServer.user.domain.dto.request.SocialLoginRequest;
 import com.sopt.sopkathonServer.user.kakao.feign.KakaoApiClient;
 import com.sopt.sopkathonServer.user.kakao.feign.KakaoAuthApiClient;
-import com.sopt.sopkathonServer.user.repository.UserRepository;
+import com.sopt.sopkathonServer.user.repository.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class KakaoSocialService extends SocialService {
     @Value("${kakao.client-id}")
     private String clientId;
 
-    private final UserRepository userRepository;
+    private final UserJpaRepository userJpaRepository;
 
     private final KakaoAuthApiClient kakaoAuthApiClient;
     private final KakaoApiClient kakaoApiClient;
@@ -43,7 +42,7 @@ public class KakaoSocialService extends SocialService {
         // Access Token으로 유저 정보 불러오기
         KakaoUserResponse userResponse = kakaoApiClient.getUserInformation("Bearer " + tokenResponse.getAccessToken());
 
-        Optional<User> findUser = userRepository.findBySocialId(userResponse.getId());
+        Optional<User> findUser = userJpaRepository.findBySocialId(userResponse.getId());
 
         User user;
         if (findUser.isEmpty()) {
@@ -55,9 +54,9 @@ public class KakaoSocialService extends SocialService {
                     userResponse.getId()
             );
 
-            userRepository.save(newUser);
+            userJpaRepository.save(newUser);
 
-            user = userRepository.findBySocialId(userResponse.getId()).get();
+            user = userJpaRepository.findBySocialId(userResponse.getId()).get();
         } else {
             user = findUser.get();
         }

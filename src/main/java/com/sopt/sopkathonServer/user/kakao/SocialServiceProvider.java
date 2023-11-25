@@ -1,6 +1,7 @@
 package com.sopt.sopkathonServer.user.kakao;
 
-import com.sopt.sopkathonServer.user.SocialService;
+import com.sopt.sopkathonServer.user.service.KakaoSocialService;
+import com.sopt.sopkathonServer.user.service.SocialService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

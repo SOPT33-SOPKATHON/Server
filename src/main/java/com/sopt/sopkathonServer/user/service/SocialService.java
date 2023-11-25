@@ -1,4 +1,4 @@
-package com.sopt.sopkathonServer.user;
+package com.sopt.sopkathonServer.user.service;
 
 
 import com.sopt.sopkathonServer.user.domain.dto.request.SocialLoginRequest;

@@ -1,7 +1,8 @@
-package com.sopt.sopkathonServer.user;
+package com.sopt.sopkathonServer.user.controller;
 
 import com.sopt.sopkathonServer.common.dto.ApiResponse;
 import com.sopt.sopkathonServer.common.exception.enums.SuccessType;
+import com.sopt.sopkathonServer.user.service.SocialService;
 import com.sopt.sopkathonServer.user.domain.dto.response.SocialLoginResponse;
 import com.sopt.sopkathonServer.user.kakao.SocialPlatform;
 import com.sopt.sopkathonServer.user.kakao.SocialServiceProvider;
