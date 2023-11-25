@@ -21,6 +21,9 @@ public class KakaoSocialService extends SocialService {
     @Value("${kakao.client-id}")
     private String clientId;
 
+    @Value("${kakao.url}")
+    private String rediredUrl;
+
     private final UserJpaRepository userJpaRepository;
 
     private final KakaoAuthApiClient kakaoAuthApiClient;
@@ -35,7 +38,7 @@ public class KakaoSocialService extends SocialService {
         KakaoAccessTokenResponse tokenResponse = kakaoAuthApiClient.getOAuth2AccessToken(
                 "authorization_code",
                 clientId,
-                "http://localhost:8080/kakao/callback",
+                rediredUrl,
                 request.getCode()
         );
 
