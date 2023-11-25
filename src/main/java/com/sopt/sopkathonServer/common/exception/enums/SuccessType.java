@@ -13,6 +13,7 @@ public enum SuccessType {
      * 200 OK
      */
     PROCESS_SUCCESS(HttpStatus.OK, "OK"),
+    GET_ROOM_SUCCESS(HttpStatus.OK, "방 가져오기에 성공했습니다"),
 
     /**
      * 201 CREATED

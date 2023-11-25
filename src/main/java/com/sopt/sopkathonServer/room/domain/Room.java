@@ -48,4 +48,10 @@ public class Room extends BaseTimeEntity {
     public void addCelebList(Celeb celeb) {
         celebList.add(celeb);
     }
+
+    public int calCelebNum(List<Celeb> celebList){
+        return celebList.size();
+
+    }
+
 }
