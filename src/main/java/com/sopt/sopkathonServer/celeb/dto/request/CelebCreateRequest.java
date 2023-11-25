@@ -3,8 +3,9 @@ package com.sopt.sopkathonServer.celeb.dto.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record CelebCreateRequest(
-        @JsonProperty("room_id")
-        Long roomId,
+        @JsonProperty("room_uuid")
+        String roomUuid,
+
         String nickname,
 
         @JsonProperty("celeb_text")

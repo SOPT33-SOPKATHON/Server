@@ -4,7 +4,10 @@ import com.sopt.sopkathonServer.celeb.domain.Celeb;
 import com.sopt.sopkathonServer.celeb.dto.request.CelebCreateRequest;
 import com.sopt.sopkathonServer.celeb.dto.response.CelebCreateResponse;
 import com.sopt.sopkathonServer.celeb.repository.CelebJpaRepository;
+import com.sopt.sopkathonServer.common.exception.enums.ErrorType;
+import com.sopt.sopkathonServer.common.exception.model.BusinessException;
 import com.sopt.sopkathonServer.room.domain.Room;
+import com.sopt.sopkathonServer.room.repository.RoomJpaRepository;
 import com.sopt.sopkathonServer.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,12 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class CelebService {
 
 
-    private final RoomService roomService;
+    private final RoomJpaRepository roomJpaRepository;
     private final CelebJpaRepository celebJpaRepository;
 
     @Transactional
     public CelebCreateResponse createCeleb(CelebCreateRequest celebrequest){
-        Room room = roomService.getRoomById(celebrequest.roomId());
+        Room room = roomJpaRepository.findRoomByRoomUUID(celebrequest.roomUuid())
+                .orElseThrow(() -> new BusinessException(ErrorType.ROOM_NOT_FOUND_EXCEPTION));
 
         Celeb celeb = celebJpaRepository.save(
                 Celeb.builder()
