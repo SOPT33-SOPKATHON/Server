@@ -1,6 +1,5 @@
 package com.sopt.sopkathonServer.room.service;
 
-
 import com.sopt.sopkathonServer.common.exception.enums.ErrorType;
 import com.sopt.sopkathonServer.common.exception.model.BusinessException;
 import com.sopt.sopkathonServer.room.domain.Room;
@@ -8,6 +7,7 @@ import com.sopt.sopkathonServer.room.dto.request.RoomCreateRequest;
 import com.sopt.sopkathonServer.room.dto.request.RoomGetRequest;
 import com.sopt.sopkathonServer.room.dto.response.RoomCreateResponse;
 import com.sopt.sopkathonServer.room.dto.response.RoomListResponse;
+import com.sopt.sopkathonServer.room.dto.response.RoomGetResponse;
 import com.sopt.sopkathonServer.room.repository.RoomJpaRepository;
 import com.sopt.sopkathonServer.user.domain.User;
 import com.sopt.sopkathonServer.user.repository.UserJpaRepository;
@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -31,6 +32,13 @@ public class RoomService {
     public Room getRoomById(final Long roomId) {
         return roomJpaRepository.findById(roomId)
                 .orElseThrow(() -> new BusinessException(ErrorType.ROOM_NOT_FOUND_EXCEPTION));
+    }
+
+    public RoomGetResponse getRoom(String roomUUID){
+        Room existRoom = roomJpaRepository.findRoomByRoomUUID(roomUUID)
+                .orElseThrow(() -> new BusinessException(ErrorType.ROOM_NOT_FOUND_EXCEPTION));
+
+        return RoomGetResponse.of(existRoom);
     }
 
     @Transactional
