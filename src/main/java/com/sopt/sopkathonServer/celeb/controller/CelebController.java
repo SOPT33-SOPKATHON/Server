@@ -1,6 +1,7 @@
 package com.sopt.sopkathonServer.celeb.controller;
 
 import com.sopt.sopkathonServer.celeb.dto.request.CelebCreateRequest;
+import com.sopt.sopkathonServer.celeb.dto.response.CelebCreateResponse;
 import com.sopt.sopkathonServer.celeb.service.CelebService;
 import com.sopt.sopkathonServer.common.dto.ApiResponse;
 import com.sopt.sopkathonServer.common.exception.enums.SuccessType;
@@ -16,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class CelebController {
     private final CelebService celebService;
     @PostMapping
-    public ApiResponse<Long> createPost(@RequestBody CelebCreateRequest request) {
-        Long celebId = celebService.createCeleb(request);
+    public ApiResponse<CelebCreateResponse> createPost(@RequestBody CelebCreateRequest request) {
 
-        return ApiResponse.success(SuccessType.CELEB_CREATE_SUCCESS, celebId);
+
+        return ApiResponse.success(SuccessType.CELEB_CREATE_SUCCESS, celebService.createCeleb(request));
     }
 }
