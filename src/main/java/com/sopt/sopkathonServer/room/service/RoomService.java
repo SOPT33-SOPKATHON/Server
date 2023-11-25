@@ -1,13 +1,11 @@
 package com.sopt.sopkathonServer.room.service;
 
-
-import com.sopt.sopkathonServer.celeb.domain.Celeb;
-import com.sopt.sopkathonServer.common.dto.ApiResponse;
 import com.sopt.sopkathonServer.common.exception.enums.ErrorType;
 import com.sopt.sopkathonServer.common.exception.model.BusinessException;
 import com.sopt.sopkathonServer.room.domain.Room;
 import com.sopt.sopkathonServer.room.dto.request.RoomCreateRequest;
 import com.sopt.sopkathonServer.room.dto.response.RoomCreateResponse;
+import com.sopt.sopkathonServer.room.dto.response.RoomGetResponse;
 import com.sopt.sopkathonServer.room.repository.RoomJpaRepository;
 import com.sopt.sopkathonServer.user.domain.User;
 import com.sopt.sopkathonServer.user.repository.UserJpaRepository;
