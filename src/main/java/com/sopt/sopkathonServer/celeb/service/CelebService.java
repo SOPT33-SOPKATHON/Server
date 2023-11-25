@@ -8,21 +8,23 @@ import com.sopt.sopkathonServer.room.domain.Room;
 import com.sopt.sopkathonServer.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
+@Transactional(readOnly = true)
 public class CelebService {
 
 
     private final RoomService roomService;
     private final CelebJpaRepository celebJpaRepository;
 
+    @Transactional
     public CelebCreateResponse createCeleb(CelebCreateRequest celebrequest){
         Room room = roomService.getRoomById(celebrequest.roomId());
 
         Celeb celeb = celebJpaRepository.save(
                 Celeb.builder()
-                        .id(celebrequest.roomId())
                         .nickname(celebrequest.nickname())
                         .celebContent(celebrequest.celebText())
                         .room(room)
@@ -30,11 +32,5 @@ public class CelebService {
 
         room.getCelebList().add(celeb);
         return CelebCreateResponse.of(celeb);
-
-
-
     }
-
-
-
 }

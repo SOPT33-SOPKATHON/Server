@@ -18,8 +18,6 @@ public class CelebController {
     private final CelebService celebService;
     @PostMapping
     public ApiResponse<CelebCreateResponse> createPost(@RequestBody CelebCreateRequest request) {
-
-
         return ApiResponse.success(SuccessType.CELEB_CREATE_SUCCESS, celebService.createCeleb(request));
     }
 }

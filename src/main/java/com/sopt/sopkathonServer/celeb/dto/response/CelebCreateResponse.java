@@ -13,6 +13,4 @@ public record CelebCreateResponse(
                 celeb.getId()
         );
     }
-
-
 }

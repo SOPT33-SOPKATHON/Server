@@ -6,6 +6,7 @@ import com.sopt.sopkathonServer.user.domain.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +28,7 @@ public class Room extends BaseTimeEntity {
 
     private String roomContent;
 
-    private int year;
-    private int month;
-    private int day;
+    private LocalDateTime time;
 
     @Column(nullable = false)
     private String roomUUID;
@@ -51,20 +50,17 @@ public class Room extends BaseTimeEntity {
 
     public int calCelebNum(List<Celeb> celebList){
         return celebList.size();
-
     }
 
-    public Room(String roomName, String roomContent, int year, int month, int day, String roomUUID, User user) {
+    public Room(String roomName, String roomContent, LocalDateTime time, String roomUUID, User user) {
         this.roomName = roomName;
         this.roomContent = roomContent;
-        this.year = year;
-        this.month = month;
-        this.day = day;
+        this.time = time;
         this.roomUUID = roomUUID;
         this.user = user;
     }
 
-    public static Room of(String roomName, String roomContent, int year, int month, int day, String roomUUID, User user) {
-        return new Room(roomName, roomContent, year, month, day, roomUUID, user);
+    public static Room of(String roomName, String roomContent, LocalDateTime time, String roomUUID, User user) {
+        return new Room(roomName, roomContent, time, roomUUID, user);
     }
 }

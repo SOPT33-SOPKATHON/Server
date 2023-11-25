@@ -54,7 +54,7 @@ public class RoomService {
         // LocalDate를 LocalDateTime으로 변환 (자정 시간을 사용)
         LocalDateTime dateTime = date.atStartOfDay();
 
-        Room room = Room.of(request.roomName(), request.roomContent(), request.celebYear(), request.celebMonth(), request.celebDay(), roomUUID, user);
+        Room room = Room.of(request.roomName(), request.roomContent(), dateTime, roomUUID, user);
 
         user.getRoomList().add(room);
 
