@@ -18,6 +18,8 @@ public enum SuccessType {
      * 201 CREATED
      */
 
+    CELEB_CREATE_SUCCESS(HttpStatus.OK, "축하 메시지가 성공적으로 생성됐습니다"),
+
     /**
      * 204 NO CONTENT
      */

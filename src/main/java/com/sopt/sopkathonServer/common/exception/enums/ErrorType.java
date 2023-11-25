@@ -14,9 +14,12 @@ public enum ErrorType {
      */
     REQUEST_VALIDATION_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 요청입니다"),
 
+
+
     /**
      * 404 NOT FOUND
      */
+    ROOM_NOT_FOUND_EXCEPTION(HttpStatus.NOT_FOUND,"해당 방을 찾을 수 없습니다"),
 
     /**
      * 500 INTERNAL SERVER ERROR
