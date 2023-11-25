@@ -46,6 +46,8 @@ public class RoomService {
 
         Room room = Room.of(request.roomName(), request.roomContent(), request.celebYear(), request.celebMonth(), request.celebDay(), roomUUID, user);
 
+        user.getRoomList().add(room);
+
         roomJpaRepository.save(room);
 
         return RoomCreateResponse.of(room);
