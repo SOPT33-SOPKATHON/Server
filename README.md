@@ -1,8 +1,8 @@
-# ✅ 솝커톤 서버
+# ✅ 콩 (Cong)
 
 > 33기 DO SOPT 솝커톤
 > 
-> 서버는 솝커톤 찢을 준비 완료.
+> 당신의 축하를 기록하세요
 
 <hr>
 
@@ -29,12 +29,14 @@
 
 ## ✅ API Docs
 
-### 🔗 [Link]() ✅링크
+### 🔗 [Link](https://rileybyeon.notion.site/API-1e4864ddfd764d13898c922e340c76b6?pvs=4) ✅링크
 ✅ 사진
 <hr>
 
 ## ✅️ ERD
 <hr>
+![image](https://github.com/SOPT33-SOPKATHON/Server/assets/67463603/810827a4-647d-45f7-931e-44ae04625af2)
+
 
 ## ✅ Project Architecture
 <img width="700" alt="image" src="https://github.com/SOPT33-SOPKATHON/Server/assets/67463603/ddac0047-3ccd-4f9d-8709-90f2bd5525db">
