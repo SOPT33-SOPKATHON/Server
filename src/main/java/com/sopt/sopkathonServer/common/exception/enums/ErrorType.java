@@ -17,9 +17,11 @@ public enum ErrorType {
 
 
     /**
+
      * 404 NOT FOUND
      */
     ROOM_NOT_FOUND_EXCEPTION(HttpStatus.NOT_FOUND,"해당 방을 찾을 수 없습니다"),
+    USER_NOT_FOUND_EXCEPTION(HttpStatus.NOT_FOUND, "일치하는 유저가 없습니다"),
 
     /**
      * 500 INTERNAL SERVER ERROR

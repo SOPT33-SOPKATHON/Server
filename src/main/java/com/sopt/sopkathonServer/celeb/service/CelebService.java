@@ -27,6 +27,8 @@ public class CelebService {
                         .celebContent(celebrequest.celebText())
                         .room(room)
                         .postIt(celebrequest.postIt()).build());
+
+        room.getCelebList().add(celeb);
         return CelebCreateResponse.of(celeb);
 
 
