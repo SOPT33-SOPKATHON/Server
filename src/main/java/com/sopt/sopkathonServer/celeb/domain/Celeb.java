@@ -8,7 +8,6 @@ import lombok.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Table(name = "celeb")
 public class Celeb extends BaseTimeEntity {
@@ -25,9 +24,19 @@ public class Celeb extends BaseTimeEntity {
     private String celebContent;
 
     @Column(nullable = false)
-    private PostIt postIt;
+    private int postIt;
 
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
+
+    @Builder
+    public Celeb(Long id, String nickname, String celebContent, int postIt, Room room){
+        this.id = id;
+        this.nickname = nickname;
+        this.celebContent = celebContent;
+        this.postIt = postIt;
+        this.room = room;
+    }
+
 }
