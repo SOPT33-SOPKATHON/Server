@@ -2,6 +2,7 @@ package com.sopt.sopkathonServer.user.domain;
 
 import com.sopt.sopkathonServer.common.domain.BaseTimeEntity;
 import com.sopt.sopkathonServer.room.domain.Room;
+import com.sopt.sopkathonServer.user.kakao.SocialPlatform;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,7 +30,29 @@ public class User extends BaseTimeEntity {
     }
 
     @Column(nullable = false)
-    private String socialId;
+    private String nickname;
 
-    private String socialAccessToken;
+    @Column(nullable = false)
+    private String profileImage;
+
+    @Column(nullable = false)
+    private String accessToken;
+
+    @Column(nullable = false)
+    private String refreshToken;
+
+    @Column(nullable = false)
+    private Long socialId;
+
+    public User(String nickname, String profileImage,String accessToken, String refreshToken, Long socialId) {
+        this.nickname = nickname;
+        this.profileImage = profileImage;
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+        this.socialId = socialId;
+    }
+
+    public static User of(String nickname, String profileImage, String accessToken, String refreshToken, Long socialId) {
+        return new User(nickname, profileImage, accessToken, refreshToken, socialId);
+    }
 }

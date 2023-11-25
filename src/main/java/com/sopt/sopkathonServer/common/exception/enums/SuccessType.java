@@ -13,6 +13,7 @@ public enum SuccessType {
      * 200 OK
      */
     PROCESS_SUCCESS(HttpStatus.OK, "OK"),
+    SOCIAL_LOGIN_SUCCESS(HttpStatus.OK, "소셜 로그인 성공"),
 
     /**
      * 201 CREATED
