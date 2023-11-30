@@ -4,8 +4,10 @@ import com.vane.badwordfiltering.BadWordFiltering;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class BadWordFilterService {
@@ -18,12 +20,25 @@ public class BadWordFilterService {
         symbols = new String[]{"!", "@", "#", "$", "%", "^", "&", "*", "_", " "};
 
         ClassPathResource resource = new ClassPathResource("badwords.txt");
-        File file = resource.getFile();
-        badWordFiltering.readFile(file, ",");
+        try (InputStream inputStream = resource.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            List<String> strings = readFile(reader, ", ");
+            badWordFiltering.addAll(strings);
+        }
     }
 
     public String filterString(String string) {
         return badWordFiltering.change(string, symbols);
     }
+    public List<String> readFile(BufferedReader reader, String delimiter) throws IOException {
+        List<String> badWords = new ArrayList<>();;
+        String line;
 
+        while ((line = reader.readLine()) != null) {
+            String[] words = line.split(delimiter);
+            Collections.addAll(badWords, words);
+        }
+
+        return badWords;
+    }
 }
