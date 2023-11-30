@@ -3,18 +3,20 @@ package com.sopt.sopkathonServer.common.util;
 import com.vane.badwordfiltering.BadWordFiltering;
 import org.springframework.stereotype.Service;
 
+import java.net.MalformedURLException;
+
 @Service
 public class BadWordFilterService {
 
     private final BadWordFiltering badWordFiltering;
     private final String[] symbols;
 
-    public BadWordFilterService() {
+    public BadWordFilterService() throws MalformedURLException {
         badWordFiltering = new BadWordFiltering();
         symbols = new String[]{"!", "@", "#", "$", "%", "^", "&", "*", "_", " "};
 
-        String url = "https://raw.githubusercontent.com/SOPT33-SOPKATHON/Server/develop/badwords.txt";
-        badWordFiltering.readURL(url, ",");
+        String filePath = "badwords.txt";
+        badWordFiltering.readFile(filePath, ",");
     }
 
     public String filterString(String string) {
