@@ -13,7 +13,7 @@ public class BadWordFilterService {
         badWordFiltering = new BadWordFiltering();
         symbols = new String[]{"!", "@", "#", "$", "%", "^", "&", "*", "_", " "};
 
-        String url = "https://github.com/SOPT33-SOPKATHON/Server/files/13509831/badword.txt";
+        String url = "https://raw.githubusercontent.com/SOPT33-SOPKATHON/Server/develop/badwords.txt";
         badWordFiltering.readURL(url, ",");
     }
 
