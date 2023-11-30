@@ -2,6 +2,7 @@ package com.sopt.sopkathonServer.room.service;
 
 import com.sopt.sopkathonServer.common.exception.enums.ErrorType;
 import com.sopt.sopkathonServer.common.exception.model.BusinessException;
+import com.sopt.sopkathonServer.common.util.BadWordFilterService;
 import com.sopt.sopkathonServer.room.domain.Room;
 import com.sopt.sopkathonServer.room.dto.request.RoomCreateRequest;
 import com.sopt.sopkathonServer.room.dto.request.RoomGetRequest;
@@ -16,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -28,7 +28,7 @@ public class RoomService {
 
     private final RoomJpaRepository roomJpaRepository;
     private final UserJpaRepository userJpaRepository;
-    private final BadWordFiltering badWordFiltering = new BadWordFiltering();
+    private final BadWordFilterService badWordFilterService;
 
     public Room getRoomById(final Long roomId) {
         return roomJpaRepository.findById(roomId)
@@ -48,9 +48,8 @@ public class RoomService {
         User user = userJpaRepository.findById(request.userId())
                 .orElseThrow(() -> new BusinessException(ErrorType.USER_NOT_FOUND_EXCEPTION));
 
-        String[] symbols = new String[]{"!", "@", "#", "$", "%", "^", "&", "*", "_"};
-        String roomName = badWordFiltering.change(request.roomName(), symbols);
-        String roomContent = badWordFiltering.change(request.roomContent(), symbols);
+        String roomName = badWordFilterService.filterString(request.roomName());
+        String roomContent = badWordFilterService.filterString(request.roomContent());
 
         String roomUUID = UUID.randomUUID().toString();
 
