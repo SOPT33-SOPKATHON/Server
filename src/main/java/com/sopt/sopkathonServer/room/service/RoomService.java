@@ -2,6 +2,7 @@ package com.sopt.sopkathonServer.room.service;
 
 import com.sopt.sopkathonServer.common.exception.enums.ErrorType;
 import com.sopt.sopkathonServer.common.exception.model.BusinessException;
+import com.sopt.sopkathonServer.common.exception.slack.SlackUtil;
 import com.sopt.sopkathonServer.common.util.BadWordFilterService;
 import com.sopt.sopkathonServer.room.domain.Room;
 import com.sopt.sopkathonServer.room.dto.request.RoomCreateRequest;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -29,6 +31,8 @@ public class RoomService {
     private final RoomJpaRepository roomJpaRepository;
     private final UserJpaRepository userJpaRepository;
     private final BadWordFilterService badWordFilterService;
+
+    private final SlackUtil slackUtil;
 
     public Room getRoomById(final Long roomId) {
         return roomJpaRepository.findById(roomId)
@@ -43,7 +47,7 @@ public class RoomService {
     }
 
     @Transactional
-    public RoomCreateResponse createRoom(RoomCreateRequest request) {
+    public RoomCreateResponse createRoom(RoomCreateRequest request) throws IOException {
 
         User user = userJpaRepository.findById(request.userId())
                 .orElseThrow(() -> new BusinessException(ErrorType.USER_NOT_FOUND_EXCEPTION));
@@ -63,6 +67,8 @@ public class RoomService {
         user.getRoomList().add(room);
 
         roomJpaRepository.save(room);
+
+        slackUtil.sendRoomAlert(room);
 
         return RoomCreateResponse.of(room);
 

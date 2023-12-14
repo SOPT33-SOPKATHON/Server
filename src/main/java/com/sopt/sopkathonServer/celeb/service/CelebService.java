@@ -6,6 +6,7 @@ import com.sopt.sopkathonServer.celeb.dto.response.CelebCreateResponse;
 import com.sopt.sopkathonServer.celeb.repository.CelebJpaRepository;
 import com.sopt.sopkathonServer.common.exception.enums.ErrorType;
 import com.sopt.sopkathonServer.common.exception.model.BusinessException;
+import com.sopt.sopkathonServer.common.exception.slack.SlackUtil;
 import com.sopt.sopkathonServer.common.util.BadWordFilterService;
 import com.sopt.sopkathonServer.room.domain.Room;
 import com.sopt.sopkathonServer.room.repository.RoomJpaRepository;
@@ -13,6 +14,8 @@ import com.vane.badwordfiltering.BadWordFiltering;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.IOException;
 
 @RequiredArgsConstructor
 @Service
@@ -24,8 +27,10 @@ public class CelebService {
     private final CelebJpaRepository celebJpaRepository;
     private final BadWordFilterService badWordFilterService;
 
+    private final SlackUtil slackUtil;
+
     @Transactional
-    public CelebCreateResponse createCeleb(CelebCreateRequest celebrequest){
+    public CelebCreateResponse createCeleb(CelebCreateRequest celebrequest) throws IOException {
         Room room = roomJpaRepository.findRoomByRoomUUID(celebrequest.roomUuid())
                 .orElseThrow(() -> new BusinessException(ErrorType.ROOM_NOT_FOUND_EXCEPTION));
 
@@ -41,6 +46,9 @@ public class CelebService {
                         .postTime(celebrequest.postTime()).build());
 
         room.getCelebList().add(celeb);
+
+        slackUtil.sendCelebAlert(celeb);
+
         return CelebCreateResponse.of(celeb);
     }
 }

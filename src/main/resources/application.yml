@@ -18,3 +18,8 @@ spring:
 kakao:
   client-id: ${CLIENT_ID}
   url: ${KAKAO_URL}
+
+slack:
+  webhook:
+    error: ${SLACK_ERROR_URL}
+    user: ${SLACK_USER_URL}

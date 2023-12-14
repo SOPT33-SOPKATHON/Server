@@ -1,5 +1,6 @@
 package com.sopt.sopkathonServer.user.service;
 
+import com.sopt.sopkathonServer.common.exception.slack.SlackUtil;
 import com.sopt.sopkathonServer.user.domain.User;
 import com.sopt.sopkathonServer.user.domain.dto.response.SocialLoginResponse;
 import com.sopt.sopkathonServer.user.kakao.dto.response.KakaoAccessTokenResponse;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -29,8 +31,10 @@ public class KakaoSocialService extends SocialService {
     private final KakaoAuthApiClient kakaoAuthApiClient;
     private final KakaoApiClient kakaoApiClient;
 
+    private final SlackUtil slackUtil;
+
     @Override
-    public SocialLoginResponse login(SocialLoginRequest request) {
+    public SocialLoginResponse login(SocialLoginRequest request) throws IOException {
 
         System.out.println(clientId);
 
@@ -60,6 +64,8 @@ public class KakaoSocialService extends SocialService {
             userJpaRepository.save(newUser);
 
             user = userJpaRepository.findBySocialId(userResponse.getId()).get();
+
+            slackUtil.sendUserAlert(user);
         } else {
             user = findUser.get();
         }

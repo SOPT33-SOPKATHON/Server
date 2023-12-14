@@ -11,13 +11,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/celebs")
 @RequiredArgsConstructor
 public class CelebController {
     private final CelebService celebService;
     @PostMapping
-    public ApiResponse<CelebCreateResponse> createPost(@RequestBody CelebCreateRequest request) {
+    public ApiResponse<CelebCreateResponse> createPost(@RequestBody CelebCreateRequest request) throws IOException {
         return ApiResponse.success(SuccessType.CELEB_CREATE_SUCCESS, celebService.createCeleb(request));
     }
 }

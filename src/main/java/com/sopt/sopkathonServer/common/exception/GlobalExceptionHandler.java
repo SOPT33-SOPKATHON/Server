@@ -2,6 +2,8 @@ package com.sopt.sopkathonServer.common.exception;
 
 import com.sopt.sopkathonServer.common.dto.ApiResponse;
 import com.sopt.sopkathonServer.common.exception.model.BusinessException;
+import com.sopt.sopkathonServer.common.exception.slack.SlackUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.sopt.sopkathonServer.common.exception.enums.ErrorType.INTERNAL_SERVER_ERROR;
 import static com.sopt.sopkathonServer.common.exception.enums.ErrorType.REQUEST_VALIDATION_EXCEPTION;
 
 
@@ -26,11 +30,7 @@ import static com.sopt.sopkathonServer.common.exception.enums.ErrorType.REQUEST_
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Void> handleIllegalArgumentException(final IllegalArgumentException e) {
-        return ResponseEntity.badRequest().build();
-    }
+    private final SlackUtil slackUtil;
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     protected ResponseEntity<ApiResponse<?>> handleBusinessException(BusinessException e) {
 
-        log.error("BusinessmException occured: {}", e.getMessage(), e);
+        log.error("BusinessException occured: {}", e.getMessage(), e);
 
         return ResponseEntity.status(e.getHttpStatus())
                 .body(ApiResponse.error(e.getErrorType(), e.getMessage()));
@@ -62,12 +62,10 @@ public class GlobalExceptionHandler {
     /**
      * 500 INTERNEL_SERVER
      */
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    @ExceptionHandler(Exception.class)
-//    protected ApiResponse<Exception> handleException(final Exception e, final HttpServletRequest request) throws IOException {
-//
-//        log.error("500 error occured: {}", e.getMessage(), e);
-//
-//        return ApiResponse.error(INTERNAL_SERVER_ERROR, e);
-//    }
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    protected ApiResponse<Exception> handleException(final Exception e, final HttpServletRequest request) throws IOException {
+        slackUtil.sendAlert(e, request);
+        return ApiResponse.error(INTERNAL_SERVER_ERROR, e);
+    }
 }

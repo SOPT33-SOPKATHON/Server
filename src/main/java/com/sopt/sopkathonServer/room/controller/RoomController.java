@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 import static com.sopt.sopkathonServer.common.exception.enums.SuccessType.ROOM_CREATE_SUCCESS;
 import static com.sopt.sopkathonServer.common.exception.enums.SuccessType.ROOM_LIST_SUCCESS;
 
@@ -32,7 +34,7 @@ public class RoomController {
     }
 
     @PostMapping("/create")
-    ApiResponse<RoomCreateResponse> createRoom(@RequestBody RoomCreateRequest request) {
+    ApiResponse<RoomCreateResponse> createRoom(@RequestBody RoomCreateRequest request) throws IOException {
         return ApiResponse.success(ROOM_CREATE_SUCCESS, roomService.createRoom(request));
     }
 
