@@ -192,7 +192,7 @@ public class SlackUtil {
         sb.append("*[🎉 이벤트 이름]*" + NEW_LINE + room.getRoomName() + DOUBLE_NEW_LINE);
         sb.append("*[💬 설명]*" + NEW_LINE + room.getRoomContent() + DOUBLE_NEW_LINE);
         sb.append("*[⏰ 일시]*" + NEW_LINE + room.getTime() + DOUBLE_NEW_LINE);
-        sb.append("*[✨ 이벤트 링크]*" + NEW_LINE + room.getRoomUUID() + DOUBLE_NEW_LINE);
+        sb.append("*[✨ 이벤트 링크]*" + NEW_LINE + "https://cong-ratulation.vercel.app/event/" + room.getRoomUUID() + DOUBLE_NEW_LINE);
 
         return sb.toString();
     }
@@ -216,7 +216,7 @@ public class SlackUtil {
     private String generateCelebRoomMessage(Celeb celeb) {
         sb.setLength(0);
         sb.append("*[🎉 이벤트 이름]*" + NEW_LINE + celeb.getRoom().getRoomName() + DOUBLE_NEW_LINE);
-        sb.append("*[✨ 이벤트 링크]*" + NEW_LINE + celeb.getRoom().getRoomUUID() + DOUBLE_NEW_LINE);
+        sb.append("*[✨ 이벤트 링크]*" + NEW_LINE + "https://cong-ratulation.vercel.app/event/" + celeb.getRoom().getRoomUUID() + DOUBLE_NEW_LINE);
 
         return sb.toString();
     }
