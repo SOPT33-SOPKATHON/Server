@@ -9,14 +9,16 @@ public record CelebGetResponse(
         Long celeb_id,
         String nickname,
         String celebContent,
-        int postIt
+        int postIt,
+        String postTime
 ) {
     public static CelebGetResponse of(Celeb celeb){
         return new CelebGetResponse(
                 celeb.getId(),
                 celeb.getNickname(),
                 celeb.getCelebContent(),
-                celeb.getPostIt()
+                celeb.getPostIt(),
+                celeb.getPostTime()
         );
     }
 

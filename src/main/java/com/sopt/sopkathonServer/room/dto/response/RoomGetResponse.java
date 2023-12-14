@@ -9,6 +9,7 @@ import com.sopt.sopkathonServer.room.domain.Room;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ public record RoomGetResponse(
 ) {
     public static RoomGetResponse of(Room room){
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy. MM. dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
         String formattedDate = room.getTime().format(formatter);
 
         // 요일을 한국어로 변환
@@ -40,6 +41,7 @@ public record RoomGetResponse(
                 room.calCelebNum(room.getCelebList()),
                 room.getCelebList()
                         .stream()
+                        .sorted(Comparator.comparing(Celeb::getId).reversed()) // id 필드를 내림차순 정렬 (최신 포스티잇 위로 오게)
                         .map(CelebGetResponse::of)
                         .collect(Collectors.toList())
         );

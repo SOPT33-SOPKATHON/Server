@@ -30,13 +30,16 @@ public class Celeb extends BaseTimeEntity {
     @JoinColumn(name = "room_id")
     private Room room;
 
+    private String postTime;
+
     @Builder
-    public Celeb(Long id, String nickname, String celebContent, int postIt, Room room){
+    public Celeb(Long id, String nickname, String celebContent, int postIt, Room room, String postTime){
         this.id = id;
         this.nickname = nickname;
         this.celebContent = celebContent;
         this.postIt = postIt;
         this.room = room;
+        this.postTime = postTime;
     }
 
 }

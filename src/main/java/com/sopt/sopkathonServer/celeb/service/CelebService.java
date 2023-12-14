@@ -37,7 +37,8 @@ public class CelebService {
                         .nickname(celebNickname)
                         .celebContent(celebText)
                         .room(room)
-                        .postIt(celebrequest.postIt()).build());
+                        .postIt(celebrequest.postIt())
+                        .postTime(celebrequest.postTime()).build());
 
         room.getCelebList().add(celeb);
         return CelebCreateResponse.of(celeb);

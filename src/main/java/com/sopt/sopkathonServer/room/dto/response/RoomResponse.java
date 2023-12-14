@@ -17,7 +17,7 @@ public record RoomResponse(
 ) {
     public static RoomResponse of(Room room) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy. MM. dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
         String formattedDate = room.getTime().format(formatter);
 
         // 요일을 한국어로 변환

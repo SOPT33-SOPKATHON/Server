@@ -12,8 +12,10 @@ public record CelebCreateRequest(
         String celebText,
 
         @JsonProperty("post_it")
-        int postIt
+        int postIt,
 
+        @JsonProperty("post_time")
+        String postTime
 ) {
 
 }
