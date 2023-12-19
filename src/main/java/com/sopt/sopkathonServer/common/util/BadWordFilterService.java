@@ -19,6 +19,11 @@ public class BadWordFilterService {
         badWordFiltering = new BadWordFiltering();
         symbols = new String[]{"!", "@", "#", "$", "%", "^", "&", "*", "_", " "};
 
+        String[] enableList = new String[]{"똥"};
+        for (String s : enableList) {
+            badWordFiltering.remove(s);
+        }
+
         ClassPathResource resource = new ClassPathResource("badwords.txt");
         try (InputStream inputStream = resource.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -31,7 +36,7 @@ public class BadWordFilterService {
         return badWordFiltering.change(string, symbols);
     }
     public List<String> readFile(BufferedReader reader, String delimiter) throws IOException {
-        List<String> badWords = new ArrayList<>();;
+        List<String> badWords = new ArrayList<>();
         String line;
 
         while ((line = reader.readLine()) != null) {
